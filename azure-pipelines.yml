@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+- group: azure-devops-yml-variables
+
 steps:
 - task: TerraformInstaller@0
   displayName: 'Terraform installer'
@@ -18,18 +21,15 @@ steps:
   displayName: 'Initilizer'
   inputs:
     command: 'init'
-    backendServiceArm: 'Ab-Azure Sub'
-    backendAzureRmResourceGroupName: 'Ab-Terraform-Training'
+    backendServiceArm: $(backendServiceArm)
+    backendAzureRmResourceGroupName: $(backendAzureRmResourceGroupName)
+    backendAzureRmStorageAccountName: $(backendAzureRmStorageAccountName)
+    backendAzureRmContainerName: $(backendAzureRmContainerName)
+    backendAzureRmKey: $(backendAzureRmKey)
+    backendAzureRmResourceGroupLocation: $(backendAzureRmResourceGroupLocation)
+    backendType: $(backendType)
+    ensureBackend:  $(ensureBackend)
 
-    backendAzureRmStorageAccountName: 'Abterraformuks'
-    backendAzureRmContainerName: 'Abterratrain'
-    backendAzureRmStorageAccountName: 'abterraformuks'
-    backendAzureRmContainerName: 'abterratrain'
-
-    backendAzureRmKey: 'terraform.tfstate'
-    backendAzureRmResourceGroupLocation: 'uksouth'
-    backendType: 'azurerm'
-    ensureBackend: true 
 - task: TerraformCLI@0
   displayName: 'Validation'
   inputs:
@@ -41,14 +41,13 @@ steps:
   inputs:
     command: 'plan'
     allowTelemetryCollection: true
-    environmentServiceName: 'Ab-Azure Sub'
-
+    environmentServiceName: $(backendServiceArm)
 - task: TerraformCLI@0
   displayName: 'Apply'
   inputs:
     command: 'apply'
     allowTelemetryCollection: true
-    environmentServiceName: 'Ab-Azure Sub'
+    environmentServiceName: $(backendServiceArm)
 
 
 
@@ -58,11 +57,11 @@ steps:
   inputs:
     command: 'plan'
     allowTelemetryCollection: true
-    environmentServiceName: 'ab-Azure Sub'
+    environmentServiceName: 'CIS_UK_Engineering_Academy'
 
 - task: TerraformCLI@0
   displayName: 'Apply'
   inputs:
     command: 'apply'
     allowTelemetryCollection: true
-    environmentServiceName: 'ab-Azure Sub'
+    environmentServiceName: 'CIS_UK_Engineering_Academy'

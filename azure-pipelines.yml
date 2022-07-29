@@ -41,28 +41,19 @@ steps:
   displayName: 'aero-planner'
   inputs:
     command: 'plan'
+    commandOptions: '-out=planresults.tf'
     allowTelemetryCollection: true
     environmentServiceName: $(backendServiceArm)
+    publishPlanPublish: 'Plan Results'
 - task: TerraformCLI@0
   displayName: 'Apply'
   inputs:
     command: 'apply'
+    commandOptions: 'planresults.tf'
     allowTelemetryCollection: true
     environmentServiceName: $(backendServiceArm)
 
 
 
 
-- task: TerraformCLI@0
-  displayName: 'aero-planner'
-  inputs:
-    command: 'plan'
-    allowTelemetryCollection: true
-    environmentServiceName: 'CIS_UK_Engineering_Academy'
 
-- task: TerraformCLI@0
-  displayName: 'Apply'
-  inputs:
-    command: 'apply'
-    allowTelemetryCollection: true
-    environmentServiceName: 'CIS_UK_Engineering_Academy'

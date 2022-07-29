@@ -41,7 +41,7 @@ steps:
   displayName: 'aero-planner'
   inputs:
     command: 'plan'
-    commandOptions: '-out=planresults.tf'
+    commandOptions: '-out planresults.tf'
     allowTelemetryCollection: true
     environmentServiceName: $(backendServiceArm)
     publishPlanResults: 'Plan Results'

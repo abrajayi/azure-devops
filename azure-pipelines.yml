@@ -10,10 +10,38 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: TerraformInstaller@0
+  displayName: 'Terraform installer'
+  inputs:
+    terraformVersion: 'latest'
+- task: TerraformCLI@0
+  displayName: 'Initilizer'
+  inputs:
+    command: 'init'
+    backendServiceArm: 'Ab-Azure Sub'
+    backendAzureRmResourceGroupName: 'Ab-Terraform-Training'
+    backendAzureRmStorageAccountName: 'abterraformuks'
+    backendAzureRmContainerName: 'abterratrain'
+    backendAzureRmKey: 'terraform.tfstate'
+    backendAzureRmResourceGroupLocation: 'uksouth'
+    backendType: 'azurerm'
+    ensureBackend: true 
+- task: TerraformCLI@0
+  displayName: 'Validation'
+  inputs:
+    command: 'validate'
+    allowTelemetryCollection: true
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: TerraformCLI@0
+  displayName: 'aero-planner'
+  inputs:
+    command: 'plan'
+    allowTelemetryCollection: true
+    environmentServiceName: 'ab-Azure Sub'
+
+- task: TerraformCLI@0
+  displayName: 'Apply'
+  inputs:
+    command: 'apply'
+    allowTelemetryCollection: true
+    environmentServiceName: 'ab-Azure Sub'

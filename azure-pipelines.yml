@@ -20,8 +20,12 @@ steps:
     command: 'init'
     backendServiceArm: 'Ab-Azure Sub'
     backendAzureRmResourceGroupName: 'Ab-Terraform-Training'
+
     backendAzureRmStorageAccountName: 'Abterraformuks'
     backendAzureRmContainerName: 'Abterratrain'
+    backendAzureRmStorageAccountName: 'abterraformuks'
+    backendAzureRmContainerName: 'abterratrain'
+
     backendAzureRmKey: 'terraform.tfstate'
     backendAzureRmResourceGroupLocation: 'uksouth'
     backendType: 'azurerm'
@@ -48,3 +52,17 @@ steps:
 
 
 
+
+- task: TerraformCLI@0
+  displayName: 'aero-planner'
+  inputs:
+    command: 'plan'
+    allowTelemetryCollection: true
+    environmentServiceName: 'ab-Azure Sub'
+
+- task: TerraformCLI@0
+  displayName: 'Apply'
+  inputs:
+    command: 'apply'
+    allowTelemetryCollection: true
+    environmentServiceName: 'ab-Azure Sub'

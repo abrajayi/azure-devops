@@ -7,7 +7,7 @@ resource "azurerm_public_ip" "public_ip" {
   allocation_method   = "Static"
   sku                 = "Standard"
   zones               = var.platform_location_az_count[var.location]
-  domain_name_label   = "my-public-ip1-aygeqdy-${var.unique_ID}"
+  domain_name_label   = "my-public-ip1-${var.unique_ID}"
   #  zones   = var.platform_location_az_count > 1 ? var.platform_location_az_count + 1 : null
 }
 

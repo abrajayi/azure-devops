@@ -1,4 +1,4 @@
-/* module "server" {
+ module "server" {
   for_each                  = toset(var.location)
   source                    = "./Modules/deployments/linux_virtual_machine"
   resource_name             = var.resource_name
@@ -10,4 +10,4 @@
   vm_data_disk_count        = var.data_disk_count
   vm_data_disk_size         = var.vm_data_disk_size
 }
- */
+ 

@@ -28,7 +28,7 @@ steps:
     backendAzureRmKey: $(backendAzureRmKey)
     backendAzureRmResourceGroupLocation: $(backendAzureRmResourceGroupLocation)
     backendType: $(backendType)
-    ensureBackend:  $(ensureBackend)
+    ensureBackend: $(ensureBackend)
 
 - task: TerraformCLI@0
   displayName: 'Validation'
